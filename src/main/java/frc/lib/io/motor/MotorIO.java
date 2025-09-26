@@ -6,16 +6,15 @@ public abstract class MotorIO {
     private Setpoint currentSetpoint;
     private boolean enabled;
     private MotorOutputs[] outputs;
+    protected final double distanceFactor = 1.0;
 
     /**
      * Sets up the internal state for a MotorIO
      * @throws IllegalArgumentException If numFollowers is less than 0
      * @param numFollowers
      */
-    protected MotorIO(int numFollowers) {
-        if (numFollowers < 0) {
-            throw new IllegalArgumentException("Number of followers must be non-negative");
-        }
+    protected MotorIO(BaseConfig config) {
+        int numFollowers = config.followers.length;
 
         currentSetpoint = new Setpoint(Type.Idle, 0);
         outputs = new MotorOutputs[numFollowers + 1];
@@ -139,8 +138,22 @@ public abstract class MotorIO {
     protected abstract void setVoltage(double voltage);
     protected abstract void setCurrent(double current);
 
+    /**
+     * Updates the underlying motor to go to the given position
+     * @param position - Radians for the physical rotor to go to
+     */
     protected abstract void setPosition(double position);
+
+    /**
+     * Updates the underlying motor to run at the given velocity
+     * @param velocity - Radians per second for the physical rotor to rotate at
+     */
     protected abstract void setVelocity(double velocity);
+
+    /**
+     * Updates the underlying motor to go to the given position with motion profiling
+     * @param position - Radians for the physical rotor to go to
+     */
     protected abstract void setProfiledPosition(double position);
 
     protected abstract void setPercentage(double percentage);
