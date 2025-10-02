@@ -2,20 +2,22 @@ package frc.lib.io.motor;
 
 import static frc.lib.io.motor.Setpoint.Type;
 
+import java.util.function.UnaryOperator;
+
 public abstract class MotorIO {
     private Setpoint currentSetpoint;
     private boolean enabled;
     private MotorOutputs[] outputs;
+    protected final double distanceFactor = 1.0;
+    protected BaseConfig config;
 
     /**
      * Sets up the internal state for a MotorIO
      * @throws IllegalArgumentException If numFollowers is less than 0
      * @param numFollowers
      */
-    protected MotorIO(int numFollowers) {
-        if (numFollowers < 0) {
-            throw new IllegalArgumentException("Number of followers must be non-negative");
-        }
+    protected MotorIO(BaseConfig config) {
+        int numFollowers = config.followers.length;
 
         currentSetpoint = new Setpoint(Type.Idle, 0);
         outputs = new MotorOutputs[numFollowers + 1];
@@ -129,6 +131,20 @@ public abstract class MotorIO {
         updateOutputs(outputs);
     }
 
+    public void changeConfig(UnaryOperator<BaseConfig> configChanger) {
+        applyConfig(configChanger.apply(config));
+    }
+
+    public void applyConfig(BaseConfig newConfiguation) {
+        config = newConfiguation;
+        flashConfig();
+    }
+
+    /**
+     * Flashes the stored configuration
+     */
+    protected abstract void flashConfig();
+
     /**
      * Gets the outputs for the motor
      * @implNote The first element in the array is where the main motor output is to go
@@ -139,8 +155,22 @@ public abstract class MotorIO {
     protected abstract void setVoltage(double voltage);
     protected abstract void setCurrent(double current);
 
+    /**
+     * Updates the underlying motor to go to the given position
+     * @param position - Radians for the physical rotor to go to
+     */
     protected abstract void setPosition(double position);
+
+    /**
+     * Updates the underlying motor to run at the given velocity
+     * @param velocity - Radians per second for the physical rotor to rotate at
+     */
     protected abstract void setVelocity(double velocity);
+
+    /**
+     * Updates the underlying motor to go to the given position with motion profiling
+     * @param position - Radians for the physical rotor to go to
+     */
     protected abstract void setProfiledPosition(double position);
 
     protected abstract void setPercentage(double percentage);
