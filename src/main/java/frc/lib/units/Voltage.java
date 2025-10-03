@@ -19,4 +19,12 @@ public class Voltage extends Value<Voltage.Unit, Voltage> {
     public Voltage(double voltage, Unit unit) {
         super(voltage, unit);
     }
+
+    public Current div(Resistance r) {
+        return new Current(this.value / r.value, Current.Unit.Ampere);
+    }
+
+    public Resistance div(Current c) {
+        return new Resistance(this.value / c.value, Resistance.Unit.Ohms);
+    }
 }

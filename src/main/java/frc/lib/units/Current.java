@@ -19,4 +19,8 @@ public class Current extends Value<Current.Unit, Current> {
     public Current(double current, Unit unit) {
         super(current, unit);
     }
+
+    public Voltage mul(Resistance r) {
+        return new Voltage(this.value * r.value, Voltage.Unit.Volts);
+    }
 }
