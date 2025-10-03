@@ -6,6 +6,7 @@ public abstract class MotorIO {
     private Setpoint currentSetpoint;
     private boolean enabled;
     private MotorOutputs[] outputs;
+    protected final double distanceFactor = 1.0;
 
     /**
      * Sets up the internal state for a MotorIO
@@ -13,9 +14,8 @@ public abstract class MotorIO {
      * @param numFollowers
      */
     protected MotorIO(int numFollowers) {
-        if (numFollowers < 0) {
-            throw new IllegalArgumentException("Number of followers must be non-negative");
-        }
+        if (numFollowers < 0)
+            throw new IllegalArgumentException("Number of followers cannot be negative");
 
         currentSetpoint = new Setpoint(Type.Idle, 0);
         outputs = new MotorOutputs[numFollowers + 1];
