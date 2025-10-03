@@ -26,7 +26,7 @@ public class Temperature {
                 return this.celsius;
         
             case Fahrenheit:
-                return this.celsius * 9.0 / 5.0 + 32;
+                return this.celsius * 9.0 / 5.0 + 32.0;
         }
 
         throw new NullPointerException();
