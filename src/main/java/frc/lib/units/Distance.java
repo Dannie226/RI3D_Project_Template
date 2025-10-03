@@ -24,14 +24,14 @@ public class Distance extends Value<Distance.Unit, Distance> {
     }
 
     public Angle div(Radius r) {
-        return new Angle(this.value / r.get(Radius.Unit.Meters), Angle.Unit.Radians);
+        return new Angle(this.value / r.value, Angle.Unit.Radians);
     }
 
     public Radius div(Angle a) {
-        return new Radius(this.value / a.get(Angle.Unit.Radians), Radius.Unit.Meters);
+        return new Radius(this.value / a.value, Radius.Unit.Meters);
     }
 
     public LinearVelocity div(Time t) {
-        return new LinearVelocity(this.value / t.get(Time.Unit.Seconds), Unit.Meters, Time.Unit.Seconds);
+        return new LinearVelocity(this.value / t.value, Unit.Meters, Time.Unit.Seconds);
     }
 }

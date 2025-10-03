@@ -1,7 +1,5 @@
 package frc.lib.units;
 
-import frc.lib.units.Unit.PerUnit;
-
 public class Radius extends Value<Radius.Unit, Radius> {
     public static enum Unit implements frc.lib.units.Unit {
         Meters(1.0),
@@ -26,10 +24,10 @@ public class Radius extends Value<Radius.Unit, Radius> {
     }
 
     public Distance mul(Angle a) {
-        return new Distance(this.value * a.get(Angle.Unit.Radians), Distance.Unit.Meters);
+        return new Distance(this.value * a.value, Distance.Unit.Meters);
     }
 
     public LinearVelocity mul(AngularVelocity v) {
-        return new LinearVelocity(this.value * v.get(new PerUnit<>(Angle.Unit.Radians, Time.Unit.Seconds)), Distance.Unit.Meters, Time.Unit.Seconds);
+        return new LinearVelocity(this.value * v.value, Distance.Unit.Meters, Time.Unit.Seconds);
     }
 }

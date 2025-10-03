@@ -22,10 +22,10 @@ public class Angle extends Value<Angle.Unit, Angle> {
     }
 
     public Distance mul(Radius r) {
-        return new Distance(this.value * r.get(Radius.Unit.Meters), Distance.Unit.Meters);
+        return new Distance(this.value * r.value, Distance.Unit.Meters);
     }
 
     public AngularVelocity div(Time t) {
-        return new AngularVelocity(this.value / t.get(Time.Unit.Seconds), Unit.Radians, Time.Unit.Seconds);
+        return new AngularVelocity(this.value / t.value, Unit.Radians, Time.Unit.Seconds);
     }
 }

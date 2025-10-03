@@ -8,11 +8,11 @@ public class AngularVelocity extends Value<PerUnit<Angle.Unit, Time.Unit>, Angul
     }
 
     public Angle mul(Time t) {
-        return new Angle(this.value * t.get(Time.Unit.Seconds), Angle.Unit.Radians);
+        return new Angle(this.value * t.value, Angle.Unit.Radians);
     }
 
     public LinearVelocity mul(Radius r) {
-        return new LinearVelocity(this.value * r.get(Radius.Unit.Meters), Distance.Unit.Meters, Time.Unit.Seconds);
+        return new LinearVelocity(this.value * r.value, Distance.Unit.Meters, Time.Unit.Seconds);
 
     }
 }
