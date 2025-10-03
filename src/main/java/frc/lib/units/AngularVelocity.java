@@ -1,0 +1,33 @@
+package frc.lib.units;
+
+public class AngularVelocity {
+    private double radPerSec;
+
+    public AngularVelocity(double vel, Angle.Unit angleUnit, Time.Unit timeUnit) {
+        this.radPerSec = vel * timeUnit.conversion / angleUnit.conversion;
+    }
+
+    public double get(Angle.Unit angleUnit, Time.Unit timeUnit) {
+        return this.radPerSec * angleUnit.conversion / timeUnit.conversion;
+    }
+
+    public void add(AngularVelocity a) {
+        this.radPerSec += a.radPerSec;
+    }
+
+    public void sub(AngularVelocity a) {
+        this.radPerSec -= a.radPerSec;
+    }
+
+    public void mul(double s) {
+        this.radPerSec *= s;
+    }
+
+    public void div(double s) {
+        this.radPerSec /= s;
+    }
+
+    public double div(AngularVelocity a) {
+        return this.radPerSec / a.radPerSec;
+    }
+}
