@@ -48,6 +48,10 @@ public class Distance {
         return new Radius(this.meters / a.get(Angle.Unit.Radians), Radius.Unit.Meter);
     }
 
+    public LinearVelocity div(Time t) {
+        return new LinearVelocity(this.meters / t.get(Time.Unit.Seconds), Unit.Meter, Time.Unit.Seconds);
+    }
+
     public double div(Distance d) {
         return this.meters / d.meters;
     }

@@ -36,6 +36,10 @@ public class Time {
         this.seconds *= s;
     }
 
+    public Distance mul(LinearVelocity v) {
+        return new Distance(this.seconds * v.get(Distance.Unit.Meter, Time.Unit.Seconds), Distance.Unit.Meter);
+    }
+
     public void div(double s) {
         this.seconds /= s;
     }

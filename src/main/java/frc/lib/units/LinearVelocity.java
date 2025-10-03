@@ -23,6 +23,10 @@ public class LinearVelocity {
         this.metersPerSecond *= s;
     }
 
+    public Distance mul(Time t) {
+        return new Distance(this.metersPerSecond * t.get(Time.Unit.Seconds), Distance.Unit.Meter);
+    }
+
     public void div(double s) {
         this.metersPerSecond /= s;
     }
