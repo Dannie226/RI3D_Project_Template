@@ -39,6 +39,10 @@ public class Radius {
         return new Distance(this.meters * a.get(Angle.Unit.Radians), Distance.Unit.Meters);
     }
 
+    public LinearVelocity mul(AngularVelocity v) {
+        return new LinearVelocity(this.meters * v.get(Angle.Unit.Radians, Time.Unit.Seconds), Distance.Unit.Meters, Time.Unit.Seconds);
+    }
+
     public void div(double s) {
         this.meters /= s;
     }

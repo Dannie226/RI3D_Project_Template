@@ -27,6 +27,11 @@ public class AngularVelocity {
         return new Angle(this.radPerSec * t.get(Time.Unit.Seconds), Angle.Unit.Radians);
     }
 
+    public LinearVelocity mul(Radius r) {
+        return new LinearVelocity(this.radPerSec * r.get(Radius.Unit.Meters), Distance.Unit.Meters, Time.Unit.Seconds);
+
+    }
+
     public void div(double s) {
         this.radPerSec /= s;
     }

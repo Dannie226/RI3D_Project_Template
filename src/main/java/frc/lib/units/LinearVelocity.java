@@ -31,6 +31,10 @@ public class LinearVelocity {
         this.metersPerSecond /= s;
     }
 
+    public AngularVelocity div(Radius r) {
+        return new AngularVelocity(this.metersPerSecond / r.get(Radius.Unit.Meters), Angle.Unit.Radians, Time.Unit.Seconds);
+    }
+
     public double div(LinearVelocity v) {
         return this.metersPerSecond / v.metersPerSecond;
     }
