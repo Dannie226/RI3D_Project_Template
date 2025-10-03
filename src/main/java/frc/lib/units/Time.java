@@ -37,7 +37,7 @@ public class Time {
     }
 
     public Distance mul(LinearVelocity v) {
-        return new Distance(this.seconds * v.get(Distance.Unit.Meter, Time.Unit.Seconds), Distance.Unit.Meter);
+        return new Distance(this.seconds * v.get(Distance.Unit.Meters, Time.Unit.Seconds), Distance.Unit.Meters);
     }
 
     public void div(double s) {

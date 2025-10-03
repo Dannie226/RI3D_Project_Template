@@ -2,11 +2,11 @@ package frc.lib.units;
 
 public class Distance {
     public static enum Unit {
-        Meter(1.0),
-        Millimeter(1000.0),
-        Centimeter(100.0),
+        Meters(1.0),
+        Millimeters(1000.0),
+        Centimeters(100.0),
         Inches(100.0 / 2.54),
-        Foot(100.0 / 2.54 / 12.0);
+        Feet(100.0 / 2.54 / 12.0);
 
         public final double conversion;
         private Unit(double conversion) {
@@ -41,15 +41,15 @@ public class Distance {
     }
 
     public Angle div(Radius r) {
-        return new Angle(this.meters / r.get(Radius.Unit.Meter), Angle.Unit.Radians);
+        return new Angle(this.meters / r.get(Radius.Unit.Meters), Angle.Unit.Radians);
     }
 
     public Radius div(Angle a) {
-        return new Radius(this.meters / a.get(Angle.Unit.Radians), Radius.Unit.Meter);
+        return new Radius(this.meters / a.get(Angle.Unit.Radians), Radius.Unit.Meters);
     }
 
     public LinearVelocity div(Time t) {
-        return new LinearVelocity(this.meters / t.get(Time.Unit.Seconds), Unit.Meter, Time.Unit.Seconds);
+        return new LinearVelocity(this.meters / t.get(Time.Unit.Seconds), Unit.Meters, Time.Unit.Seconds);
     }
 
     public double div(Distance d) {

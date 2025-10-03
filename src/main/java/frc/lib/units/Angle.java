@@ -35,7 +35,7 @@ public class Angle {
     }
 
     public Distance mul(Radius r) {
-        return new Distance(this.radians * r.get(Radius.Unit.Meter), Distance.Unit.Meter);
+        return new Distance(this.radians * r.get(Radius.Unit.Meters), Distance.Unit.Meters);
     }
 
     public void div(double s) {

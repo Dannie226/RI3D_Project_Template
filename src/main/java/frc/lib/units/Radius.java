@@ -2,11 +2,11 @@ package frc.lib.units;
 
 public class Radius {
     public static enum Unit {
-        Meter(1.0),
-        Millimeter(1000.0),
-        Centimeter(100.0),
+        Meters(1.0),
+        Millimeters(1000.0),
+        Centimeters(100.0),
         Inches(100.0 / 2.54),
-        Foot(100.0 / 2.54 / 12.0);
+        Feet(100.0 / 2.54 / 12.0);
 
         public final double conversion;
         private Unit(double conversion) {
@@ -36,7 +36,7 @@ public class Radius {
     }
 
     public Distance mul(Angle a) {
-        return new Distance(this.meters * a.get(Angle.Unit.Radians), Distance.Unit.Meter);
+        return new Distance(this.meters * a.get(Angle.Unit.Radians), Distance.Unit.Meters);
     }
 
     public void div(double s) {
