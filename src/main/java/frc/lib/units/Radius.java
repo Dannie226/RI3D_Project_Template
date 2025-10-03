@@ -35,6 +35,10 @@ public class Radius {
         this.meters *= s;
     }
 
+    public Distance mul(Angle a) {
+        return new Distance(this.meters * a.get(Angle.Unit.Radians), Distance.Unit.Meter);
+    }
+
     public void div(double s) {
         this.meters /= s;
     }

@@ -40,6 +40,10 @@ public class Distance {
         this.meters /= s;
     }
 
+    public Angle div(Radius r) {
+        return new Angle(this.meters / r.get(Radius.Unit.Meter), Angle.Unit.Radians);
+    }
+
     public double div(Distance d) {
         return this.meters / d.meters;
     }
