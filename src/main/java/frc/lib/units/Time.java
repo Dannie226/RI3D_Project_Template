@@ -40,6 +40,10 @@ public class Time {
         return new Distance(this.seconds * v.get(Distance.Unit.Meters, Time.Unit.Seconds), Distance.Unit.Meters);
     }
 
+    public Angle mul(AngularVelocity v) {
+        return new Angle(this.seconds * v.get(Angle.Unit.Radians, Time.Unit.Seconds), Angle.Unit.Radians);
+    }
+
     public void div(double s) {
         this.seconds /= s;
     }

@@ -42,6 +42,10 @@ public class Angle {
         this.radians /= s;
     }
 
+    public AngularVelocity div(Time t) {
+        return new AngularVelocity(this.radians / t.get(Time.Unit.Seconds), Unit.Radians, Time.Unit.Seconds);
+    }
+
     public double div(Angle a) {
         return this.radians / a.radians;
     }

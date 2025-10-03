@@ -23,6 +23,10 @@ public class AngularVelocity {
         this.radPerSec *= s;
     }
 
+    public Angle mul(Time t) {
+        return new Angle(this.radPerSec * t.get(Time.Unit.Seconds), Angle.Unit.Radians);
+    }
+
     public void div(double s) {
         this.radPerSec /= s;
     }
