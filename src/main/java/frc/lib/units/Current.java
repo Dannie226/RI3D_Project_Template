@@ -1,7 +1,7 @@
 package frc.lib.units;
 
-public class Current {
-    public static enum Unit {
+public class Current extends Value<Current.Unit, Current> {
+    public static enum Unit implements frc.lib.units.Unit {
         Ampere(1.0),
         Milliampere(1000.0);
 
@@ -9,34 +9,14 @@ public class Current {
         private Unit(double conversion) {
             this.conversion = conversion;
         }
+
+        @Override
+        public double getConversionFactor() {
+            return conversion;
+        }
     }
 
-    private double amps;
     public Current(double current, Unit unit) {
-        this.amps = current / unit.conversion;
-    }
-
-    public double get(Unit unit) {
-        return this.amps / unit.conversion;
-    }
-
-    public void add(Current c) {
-        this.amps -= c.amps;
-    }
-
-    public void sub(Current c) {
-        this.amps -= c.amps;
-    }
-
-    public void mul(double s) {
-        this.amps *= s;
-    }
-
-    public void div(double s) {
-        this.amps /= s;
-    }
-
-    public double div(Current c) {
-        return this.amps / c.amps;
+        super(current, unit);
     }
 }

@@ -1,7 +1,7 @@
 package frc.lib.units;
 
-public class Distance {
-    public static enum Unit {
+public class Distance extends Value<Distance.Unit, Distance> {
+    public static enum Unit implements frc.lib.units.Unit {
         Meters(1.0),
         Millimeters(1000.0),
         Centimeters(100.0),
@@ -12,47 +12,26 @@ public class Distance {
         private Unit(double conversion) {
             this.conversion = conversion;
         }
-    }
 
-    private double meters;
+        @Override
+        public double getConversionFactor() {
+            return conversion;
+        }
+    }
 
     public Distance(double distance, Unit unit) {
-        this.meters = distance / unit.conversion;
-    }
-
-    public double get(Unit unit) {
-        return this.meters * unit.conversion;
-    }
-
-    public void add(Distance d) {
-        this.meters += d.meters;
-    }
-
-    public void sub(Distance d) {
-        this.meters -= d.meters;
-    }
-
-    public void mul(double s) {
-        this.meters *= s;
-    }
-
-    public void div(double s) {
-        this.meters /= s;
+        super(distance, unit);
     }
 
     public Angle div(Radius r) {
-        return new Angle(this.meters / r.get(Radius.Unit.Meters), Angle.Unit.Radians);
+        return new Angle(this.value / r.get(Radius.Unit.Meters), Angle.Unit.Radians);
     }
 
     public Radius div(Angle a) {
-        return new Radius(this.meters / a.get(Angle.Unit.Radians), Radius.Unit.Meters);
+        return new Radius(this.value / a.get(Angle.Unit.Radians), Radius.Unit.Meters);
     }
 
     public LinearVelocity div(Time t) {
-        return new LinearVelocity(this.meters / t.get(Time.Unit.Seconds), Unit.Meters, Time.Unit.Seconds);
-    }
-
-    public double div(Distance d) {
-        return this.meters / d.meters;
+        return new LinearVelocity(this.value / t.get(Time.Unit.Seconds), Unit.Meters, Time.Unit.Seconds);
     }
 }

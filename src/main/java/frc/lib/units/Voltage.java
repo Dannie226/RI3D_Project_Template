@@ -1,7 +1,7 @@
 package frc.lib.units;
 
-public class Voltage {
-    public static enum Unit {
+public class Voltage extends Value<Voltage.Unit, Voltage> {
+    public static enum Unit implements frc.lib.units.Unit {
         Volts(1.0),
         Millivolts(1000.0);
 
@@ -9,34 +9,14 @@ public class Voltage {
         private Unit(double conversion) {
             this.conversion = conversion;
         }
+
+        @Override
+        public double getConversionFactor() {
+            return conversion;
+        }
     }
 
-    private double volts;
     public Voltage(double voltage, Unit unit) {
-        this.volts = voltage / unit.conversion;
-    }
-
-    public double get(Unit unit) {
-        return this.volts * unit.conversion;
-    }
-
-    public void add(Voltage v) {
-        this.volts += v.volts;
-    }
-
-    public void sub(Voltage v) {
-        this.volts -= v.volts;
-    }
-
-    public void mul(double s) {
-        this.volts *= s;
-    }
-
-    public void div(double s) {
-        this.volts /= s;
-    }
-
-    public double div(Voltage v) {
-        return this.volts / v.volts;
+        super(voltage, unit);
     }
 }

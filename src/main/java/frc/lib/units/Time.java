@@ -1,7 +1,9 @@
 package frc.lib.units;
 
-public class Time {
-    public static enum Unit {
+import frc.lib.units.Unit.PerUnit;
+
+public class Time extends Value<Time.Unit, Time> {
+    public static enum Unit implements frc.lib.units.Unit {
         Seconds(1.0),
         Minutes(1.0 / 60.0),
         Hours(1.0 / 60.0 / 60.0),
@@ -12,43 +14,22 @@ public class Time {
         private Unit(double conversion) {
             this.conversion = conversion;
         }
-    }
 
-    private double seconds;
+        @Override
+        public double getConversionFactor() {
+            return conversion;
+        }
+    }
 
     public Time(double time, Unit unit) {
-        this.seconds = time / unit.conversion;
-    }
-
-    public double get(Unit unit) {
-        return this.seconds * unit.conversion;
-    }
-
-    public void add(Time t) {
-        this.seconds += t.seconds;
-    }
-
-    public void sub(Time t) {
-        this.seconds -= t.seconds;
-    }
-
-    public void mul(double s) {
-        this.seconds *= s;
+        super(time, unit);
     }
 
     public Distance mul(LinearVelocity v) {
-        return new Distance(this.seconds * v.get(Distance.Unit.Meters, Time.Unit.Seconds), Distance.Unit.Meters);
+        return new Distance(this.value * v.get(new PerUnit<>(Distance.Unit.Meters, Time.Unit.Seconds)), Distance.Unit.Meters);
     }
 
     public Angle mul(AngularVelocity v) {
-        return new Angle(this.seconds * v.get(Angle.Unit.Radians, Time.Unit.Seconds), Angle.Unit.Radians);
-    }
-
-    public void div(double s) {
-        this.seconds /= s;
-    }
-
-    public double div(Time t) {
-        return this.seconds / t.seconds;
+        return new Angle(this.value * v.get(new PerUnit<>(Angle.Unit.Radians, Time.Unit.Seconds)), Angle.Unit.Radians);
     }
 }
